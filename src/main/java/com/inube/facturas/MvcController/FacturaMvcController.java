@@ -24,4 +24,5 @@ public class FacturaMvcController {
         return "facturas/list";
     }
     @GetMapping
+
 }
