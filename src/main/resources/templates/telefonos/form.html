@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${action == 'new' ? 'Crear Telefono' : 'Editar Telefono'}">Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2 class="mb-4"
+        th:text = "${action == 'new' ? 'Registrar Nuevo Telefono' : 'Editar Telefono'}">
+
+    </h2>
+    <form th:action="@{/web/telefonos}"
+          th:object="${telefono}"
+          method="post">
+
+        <!-- ID oculto -->
+        <input type="hidden" th:field="*{idTelefono}" />
+
+        <!-- Numero de telefono -->
+        <div class = "mb-3">
+            <label class="form-label"> Numero de Telefono:</label>
+            <input type="text"
+                   th:field="*{telefono}"
+                   class="form-control"
+                   required>
+</div>
+        <!--Cliente -->
+        <div class="mb-3">
+            <label class="form-label"> Cliente Asociado:</label>
+            <select th:field="*{cliente.idCliente}"
+                    class="form-select"
+                    required>
+
+                <option value="">-- Seleccionar Cliente --</option>
+
+                <option th:each="cli : ${clientes}"
+                th:value="${cli.idCliente}"
+                th:text="${cli.nombre + '' + cli.apellidoPaterno + ' ' + cli.apellidoMaterno}">
+                </option>
+            </select>
+        </div>
+
+        <!-- Botones -->
+        <button type="submit"
+                class="btn btn-success"
+                th:text="${action == 'new' ? 'Guardar' : 'Actualizar'}">
+        </button>
+        <a th:href="@{/web/telefonos}"
+           class="btn btn-secondary">
+            Cancelar
+        </a>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+</body>
+</html>
+
+
