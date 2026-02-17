@@ -23,4 +23,5 @@ public class FacturaMvcController {
         model.addAttribute("filtro", "todos");
         return "facturas/list";
     }
+    @GetMapping
 }
