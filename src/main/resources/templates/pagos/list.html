@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!--Carga del motor de plantillas para que reconozca el estilo-->
+<head>
+    <title>Lista de Pagos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Lista de Pagos</h2>
+    <a th:href="@{/web/pagos/new}" class="btn btn-primary me-2">
+        Realizar Pago
+    </a>
+    <a th:href="@{/web/clientes}" class="btn btn-secondary">
+        Volver a Clientes
+    </a>
+    <table class="table table-striped table-hover mt-3">
+        <thead class="table-dark">
+        <tr>
+        <th>ID Pago</th>
+            <th>ID Factura </th>
+            <th>Monto</th>
+        <th>Fecha </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pago : ${pagos}">
+            <td th:text="${pago.idPago}"></td>
+            <td th:text="${pago.factura != null ? pago.factura.idFactura : 'N/A'}"></td>
+            <td th:text="${pago.monto}"></td>
+            <td th:text="${pago.fechaPago}"></td>
+            <td>
+                <a th:href="@{/web/pagos/edit/{id}(id=${pago.idPago})}" class="btn btn-sm btn-info text-white">Editar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+</body>
+</html>

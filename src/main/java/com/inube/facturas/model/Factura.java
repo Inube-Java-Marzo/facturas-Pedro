@@ -3,9 +3,13 @@ package com.inube.facturas.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.ToString;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,21 +23,23 @@ import java.util.List;
 @Table(name = "FACTURAS")
 public class Factura {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "factura-seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "factura_seq")
     @SequenceGenerator(name = "factura_seq", sequenceName = "SEC_ID_FACTURA", allocationSize = 1)
     @Column(name = "ID_FACTURA", nullable = false)
     private Long idFactura;
 
     //Para cardinalidad, tomar de referencia la clase FACTURAS (Muchas para un solo cliente)
     @ManyToOne
-    @JsonIgnore
+    @JsonIgnore //Para levantar el rest controller y no se autoconsuma, no recursivo
     @JoinColumn(name = "ID_CLIENTE", nullable = false,
             referencedColumnName = "ID_CLIENTE",
             foreignKey = @jakarta.persistence.ForeignKey(name = "FK_ID_CLIENTE_FACTURAS"))
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Cliente cliente;
 
-    @Column(name = "MONTO", nullable = false, length = 10)
-    private Double monto; //Recomendable para precios
+    @Column(name = "MONTO_TOTAL", nullable = false, length = 10)
+    private BigDecimal monto; //Recomendable para precios
 
     @Column(name = "FOLIO", nullable = false)
     private String folio;
@@ -44,15 +50,16 @@ public class Factura {
     @Column(name = "FECHA_FACTURA", nullable = false)
     private LocalDate fechaFactura;
 
-    //Crearlo inmediatemente despues de agregar el campo en la BD
+    //Crearlo inmediatemente después de agregar el campo en la BD
     @Column(name = "ACTIVO", nullable = false)
     private Integer activo = 1;
 
     //Modelando lo que quiero ver en mi clase
     //Una factura puede tener varios pagos, entonces...
     @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Pago> pagos;
-
 
 
 }

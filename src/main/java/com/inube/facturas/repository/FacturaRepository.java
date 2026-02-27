@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
+//Parametros JPA : Clase y llave primaria
 @Repository
 public interface FacturaRepository extends JpaRepository<Factura, Long> {
+//FETCH paa evitar excepcion de tipo LAZY inicialization exception.
 
     @Query("""
         SELECT f
@@ -18,7 +19,8 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
           LEFT JOIN FETCH f.pagos
                   WHERE f.idFactura = :id               
         """)
-    Optional<Factura> findByIdWithPagos(Long id);
+
+    Optional<Factura> findByIdWithPagos(@Param("id") Long id);
 
     List<Factura> findByActivo(Integer activo);
 

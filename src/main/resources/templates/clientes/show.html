@@ -14,12 +14,6 @@
 <div class="container mt-4">
   <div class="card shadow">
     <div class="card-body">
-      <!--div class="d-flex justify-content-between">
-      <h3 class="mb-3" th:text="${cliente.nombre+' '+$cliente.apellidoPaterno+$cliente.apellidoMaterno != null ? ' '+ cliente.apellidoMaterno : ''}">
-        Nombre del cliente
-      </h3>
-        <a th:href="@{/web/clientes}" class="btn btn-secondary"><- Volver</a>
-    </div-->
       <div class="d-flex justify-content-between">
         <h3 class="mb-3"
             th:text="${cliente.nombre + ' ' + cliente.apellidoPaterno +
@@ -28,7 +22,7 @@
         </h3>
         <a th:href="@{/web/clientes}" class="btn btn-secondary"><- Volver</a>
       </div>
-  <hr/>
+  <hr>
     <div class="row 9-3">
       <div class="col-md-6">
         <p><strong>ID:</strong>

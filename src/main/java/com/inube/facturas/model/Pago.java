@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,6 +31,8 @@ public class Pago {
     @JoinColumn(name = "ID_FACTURA", nullable = false,
     referencedColumnName = "ID_FACTURA",
     foreignKey = @jakarta.persistence.ForeignKey(name = "FK_ID_FACTURA_PAGOS"))
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Factura factura;
 
     @Column(name = "MONTO", nullable = false, length = 10)
