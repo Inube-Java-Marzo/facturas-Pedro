@@ -79,7 +79,7 @@ public class ClienteMvcController {
             cliente = new Cliente();
             cliente.setActivo(1);
             //Por defecto activo
-            model.addAttribute("cliente", "new");
+            model.addAttribute("action", "new");
         }
         model.addAttribute("cliente", cliente);
         return "clientes/form";
