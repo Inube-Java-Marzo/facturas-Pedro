@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>mx.com.inube</groupId>
-	<artifactId>apirest</artifactId>
+	<artifactId>facturas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>apirest</name>
 	<description>Ejemplo de api rest con sprint con el modelo MVC</description>
